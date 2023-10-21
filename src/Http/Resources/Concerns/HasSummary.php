@@ -4,19 +4,19 @@ namespace dnj\UserLogger\Http\Resources\Concerns;
 
 trait HasSummary
 {
-	protected bool $summary = false;
+    protected bool $summary = false;
 
-	public function summarize(bool $summary = true): static
-	{
-		$this->summary = $summary;
+    public function summarize(bool $summary = true): static
+    {
+        $this->summary = $summary;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function full(bool $full = true): static
-	{
-		$this->summary = !$full;
+    public function full(bool $full = true): static
+    {
+        $this->summary = !$full;
 
-		return $this;
-	}
+        return $this;
+    }
 }

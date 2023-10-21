@@ -125,7 +125,7 @@ class Logger implements ILogger
         return $log;
     }
 
-    public function log(?string $event = null): Log
+    public function log(string $event = null): Log
     {
         $logger = $this;
         if ($event) {

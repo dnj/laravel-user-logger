@@ -14,22 +14,21 @@ use Orchestra\Testbench\Concerns\WithWorkbench;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-	use RefreshDatabase;
-	use WithWorkbench;
+    use RefreshDatabase;
+    use WithWorkbench;
 
+    protected function createUserWithAbility(string $ability): IUser
+    {
+        $myType = Type::factory()
+            ->has(TypeAbility::factory()->withName($ability), 'abilities')
+            ->has(TypeTranslate::factory()->withLocale(App::getLocale()), 'translates')
+            ->create();
 
-	protected function createUserWithAbility(string $ability): IUser
-	{
-		$myType = Type::factory()
-			->has(TypeAbility::factory()->withName($ability), 'abilities')
-			->has(TypeTranslate::factory()->withLocale(App::getLocale()), 'translates')
-			->create();
+        return User::factory()->withType($myType)->create();
+    }
 
-		return User::factory()->withType($myType)->create();
-	}
-
-	protected function createUserWithModelAbility(string $model, string $ability): IUser
-	{
-		return $this->createUserWithAbility(Policy::getModelAbilityName($model, $ability));
-	}
+    protected function createUserWithModelAbility(string $model, string $ability): IUser
+    {
+        return $this->createUserWithAbility(Policy::getModelAbilityName($model, $ability));
+    }
 }

@@ -7,8 +7,8 @@ use dnj\UserLogger\Contracts\ILog;
 
 class LogPolicy extends Policy
 {
-	public function getModel(): string
-	{
-		return ILog::class;
-	}
+    public function getModel(): string
+    {
+        return ILog::class;
+    }
 }

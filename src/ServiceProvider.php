@@ -42,8 +42,8 @@ class ServiceProvider extends SupportServiceProvider
             return;
         }
         $prefix = config('user-logger.routes.prefix', 'api/user-logger');
-        Route::prefix($prefix)->name("user-logger.")->group(function () {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
+        Route::prefix($prefix)->name('user-logger.')->group(function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         });
     }
 

@@ -25,7 +25,6 @@ class Log extends Model implements ILog
         return LogFactory::new();
     }
 
-
     public const UPDATED_AT = null;
 
     protected $casts = [
@@ -49,20 +48,21 @@ class Log extends Model implements ILog
     /**
      * @param array{id?:int,event?:string|string[],user?:int|IUser|null,subject?:Model|string|array{type:string,id?:string}|null,ip?:string|string[]|null} $filters
      */
-    public function scopeFilter(Builder $query, array $filters) {
+    public function scopeFilter(Builder $query, array $filters)
+    {
         if (isset($filters['id'])) {
-            $query->where("id", $filters['id']);
+            $query->where('id', $filters['id']);
         }
         if (isset($filters['event'])) {
             $this->scopeWithEvent($query, $filters['event']);
         }
-        if (array_key_exists("user", $filters)) {
+        if (array_key_exists('user', $filters)) {
             $this->scopeWithUser($query, $filters['user']);
         }
-        if (array_key_exists("subject", $filters)) {
+        if (array_key_exists('subject', $filters)) {
             $this->scopeWithSubject($query, $filters['subject']);
         }
-        if (array_key_exists("ip", $filters)) {
+        if (array_key_exists('ip', $filters)) {
             $this->scopeWithIP($query, $filters['ip']);
         }
     }
@@ -70,58 +70,65 @@ class Log extends Model implements ILog
     /**
      * @param string[]|string $event
      */
-    public function scopeWithEvent(Builder $query, array|string $event): void {
+    public function scopeWithEvent(Builder $query, array|string $event): void
+    {
         if (!is_array($event)) {
             $event = [$event];
         }
-        $query->whereIn("event", $event);
+        $query->whereIn('event', $event);
     }
 
     /**
      * @param string[]|string|null $ip
      */
-    public function scopeWithIP(Builder $query, array|string|null $ip): void {
-        if ($ip === null) {
-            $query->whereNull("ip");
+    public function scopeWithIP(Builder $query, array|string|null $ip): void
+    {
+        if (null === $ip) {
+            $query->whereNull('ip');
+
             return;
         }
         if (!is_array($ip)) {
             $ip = [$ip];
         }
-        $query->whereIn("ip", $ip);
+        $query->whereIn('ip', $ip);
     }
 
-    public function scopeWithUser(Builder $query, int|IUser|null $user): void {
-        if ($user === null) {
-            $query->whereNull("user_id");
+    public function scopeWithUser(Builder $query, int|IUser|null $user): void
+    {
+        if (null === $user) {
+            $query->whereNull('user_id');
+
             return;
         }
         $user = User::ensureId($user);
-        $query->where("user_id", $user);
+        $query->where('user_id', $user);
     }
 
     /**
      * @param Model|string|array{type:string,id?:string}|null $subject
      */
-    public function scopeWithSubject(Builder $query, Model|string|array|null $subject): void {
-        if ($subject === null) {
-            $query->whereNull("subject_type");
+    public function scopeWithSubject(Builder $query, Model|string|array|null $subject): void
+    {
+        if (null === $subject) {
+            $query->whereNull('subject_type');
+
             return;
         }
         if (is_string($subject)) {
-            $subject = array(
-                'type' => $subject
-            );
-        } else if ($subject instanceof Model) {
-            $subject = array(
+            $subject = [
+                'type' => $subject,
+            ];
+        } elseif ($subject instanceof Model) {
+            $subject = [
                 'type' => get_class($subject),
                 'id' => $subject->getKey(),
-            );
+            ];
         }
-        
-        $query->where("subject_type", $subject['type']);
+
+        $query->where('subject_type', $subject['type']);
         if (isset($subject['id'])) {
-            $query->where("subject_id", $subject['id']);
+            $query->where('subject_id', $subject['id']);
         }
     }
 

@@ -8,16 +8,17 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class LogResource extends JsonResource
 {
-	use HasSummary;
+    use HasSummary;
 
-	public function toArray($request)
-	{
-		$data = parent::toArray($request);
-		if ($this->summary) {
-			unset($data['properties']);
-		} else {
-			$data['user'] = UserResource::make($this->resource->user);
-		}
-		return $data;
-	}
+    public function toArray($request)
+    {
+        $data = parent::toArray($request);
+        if ($this->summary) {
+            unset($data['properties']);
+        } else {
+            $data['user'] = UserResource::make($this->resource->user);
+        }
+
+        return $data;
+    }
 }

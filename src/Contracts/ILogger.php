@@ -34,5 +34,5 @@ interface ILogger
 
     public function build(): ILog;
 
-    public function log(?string $event = null): ILog;
+    public function log(string $event = null): ILog;
 }

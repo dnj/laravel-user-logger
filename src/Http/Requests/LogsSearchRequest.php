@@ -14,20 +14,20 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class LogsSearchRequest extends FormRequest
 {
-	public function authorize(): bool
-	{
-		return $this->user()->can('viewAny', ILog::class);
-	}
+    public function authorize(): bool
+    {
+        return $this->user()->can('viewAny', ILog::class);
+    }
 
-	public function rules(): array
-	{
-		return [
-			'id' => ['sometimes', 'required', 'numeric'],
-			'event' => ['sometimes', 'required', 'string'],
-			'user_id' => ['sometimes', 'required', app(UserExists::class)->userHasAccess($this->user())],
-			'subject.type' => ['sometimes', 'required', new SubjectType()],
-			'subject.id' => ['required_with:subject.type', 'string'],
-			'ip' => ['sometimes', 'required', 'ip']
-		];
-	}
+    public function rules(): array
+    {
+        return [
+            'id' => ['sometimes', 'required', 'numeric'],
+            'event' => ['sometimes', 'required', 'string'],
+            'user_id' => ['sometimes', 'required', app(UserExists::class)->userHasAccess($this->user())],
+            'subject.type' => ['sometimes', 'required', new SubjectType()],
+            'subject.id' => ['required_with:subject.type', 'string'],
+            'ip' => ['sometimes', 'required', 'ip'],
+        ];
+    }
 }
