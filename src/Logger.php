@@ -119,7 +119,7 @@ class Logger implements ILogger
         $log->user_id = $this->user instanceof Authenticatable ? $this->user->getAuthIdentifier() : $this->user;
         $log->subject()->associate($this->subject);
         $log->properties = $this->properties;
-        $log->created_at = $this->createDate;
+        $log->created_at = $this->createDate ?? now();
         $log->ip = $this->ip;
 
         return $log;
