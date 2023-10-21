@@ -3,7 +3,8 @@
 	"license": "MIT",
 	"autoload": {
 		"psr-4": {
-			"dnj\\UserLogger\\": "src/"
+			"dnj\\UserLogger\\": "src/",
+			"dnj\\UserLogger\\Database\\Factories\\": "database/factories/"
 		}
 	},
 	"autoload-dev": {
@@ -12,7 +13,8 @@
 		}
 	},
 	"require": {
-		"php": "^8.1"
+		"php": "^8.1",
+		"dnj/laravel-aaa": "^1.1.0"
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,

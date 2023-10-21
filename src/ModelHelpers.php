@@ -2,22 +2,12 @@
 
 namespace dnj\UserLogger;
 
+use dnj\AAA\Models\User;
+
 trait ModelHelpers
 {
-    protected function getUserModel(): ?string
-    {
-        return config('user-logger.user_model');
-    }
-
     protected function getUserTable(): ?string
     {
-        $userModel = $this->getUserModel();
-
-        $userTable = null;
-        if ($userModel) {
-            $userTable = (new $userModel())->getTable();
-        }
-
-        return $userTable;
+        return (new User())->getTable();
     }
 }
