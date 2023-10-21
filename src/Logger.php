@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class Logger implements ILogger
 {
     protected string|int|Authenticatable|null $user = null;
-    protected ?Model $model = null;
+    protected ?Model $subject = null;
     protected mixed $properties = null;
     protected ?\DateTimeInterface $createDate = null;
     protected ?string $ip = null;
