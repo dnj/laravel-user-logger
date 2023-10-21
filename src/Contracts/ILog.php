@@ -2,16 +2,12 @@
 
 namespace dnj\UserLogger\Contracts;
 
-use Illuminate\Contracts\Auth\Authenticatable;
+use dnj\AAA\Contracts\IOwnerableModel;
 use Illuminate\Database\Eloquent\Model;
 
-interface ILog
+interface ILog extends IOwnerableModel
 {
     public function getId(): ?int;
-
-    public function getUser(): ?Authenticatable;
-
-    public function getUserId(): ?int;
 
     public function isAnonymous(): bool;
 

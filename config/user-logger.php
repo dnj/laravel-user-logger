@@ -6,4 +6,9 @@ return [
 	'subject_returns_soft_deleted_models' => false,
 
 	'user_model' => null,
+
+	'routes' => [
+		'enable' => true,
+		'prefix' => 'api/user-logger',
+	],
 ];
