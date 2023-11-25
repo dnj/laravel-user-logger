@@ -28,6 +28,9 @@
 		"test:codestyle": "vendor/bin/php-cs-fixer fix -v --dry-run --stop-on-violation --using-cache=no"
 	},
 	"extra": {
+		"branch-alias": {
+			"dev-master": "1.1.x-dev"
+		},
 		"laravel": {
 			"providers": [
 				"dnj\\UserLogger\\ServiceProvider"
