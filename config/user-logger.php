@@ -11,4 +11,8 @@ return [
 		'enable' => true,
 		'prefix' => 'api/user-logger',
 	],
+
+	'migrations' => [
+		'enable' => true,
+	],
 ];

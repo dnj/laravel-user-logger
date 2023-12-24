@@ -26,13 +26,23 @@ class ServiceProvider extends SupportServiceProvider
 
     public function boot()
     {
+        $this->registerPublishes();
         $this->registerPolicies();
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->registerRoutes();
+    }
+
+    protected function registerPublishes(): void
+    {
         if ($this->app->runningInConsole()) {
+            if (config('user-logger.migrations.enable')) {
+                $this->loadMigrationsFrom([
+                    __DIR__.'/../database/migrations' => database_path('migrations'),
+                ], ['user-logger', 'user-logger-migrations']);
+            }
+
             $this->publishes([
                 __DIR__.'/../config/user-logger.php' => config_path('user-logger.php'),
-            ], 'config');
+            ], ['user-logger', 'user-logger-config', 'config']);
         }
     }
 
