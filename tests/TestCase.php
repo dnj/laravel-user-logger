@@ -33,17 +33,4 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         return $this->createUserWithAbility(Policy::getModelAbilityName($model, $ability));
     }
-
-    protected function defineDatabaseMigrations(): void
-    {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return [
-            AAAServiceProvider::class,
-            UserLoggerServiceProvider::class,
-        ];
-    }
 }

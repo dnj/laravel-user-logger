@@ -35,9 +35,7 @@ class ServiceProvider extends SupportServiceProvider
     {
         if ($this->app->runningInConsole()) {
             if (config('user-logger.migrations.enable')) {
-                $this->loadMigrationsFrom([
-                    __DIR__.'/../database/migrations' => database_path('migrations'),
-                ], ['user-logger', 'user-logger-migrations']);
+                $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
             }
 
             $this->publishes([
